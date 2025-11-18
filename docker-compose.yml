@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: appsec-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: appsec_user
+      POSTGRES_PASSWORD: super-secure-password-123
+      POSTGRES_DB: appsec_banking-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
