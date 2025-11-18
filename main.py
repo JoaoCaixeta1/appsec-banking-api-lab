@@ -125,17 +125,13 @@ def get_user_profile(
 ): 
     print(f"--- USUÁRIO LOGADO: {current_user.username} ---")
     
-    # -- Correção da Vulnerabilidade A01:IDOR -- 
-
-    # Estrutura condicional para checagem de autorização.
-    """
+    # - Correção da Vulnerabilidade A01:IDOR com uma estrutura condicional para checagem de autorização -
     if current_user.id != user_id:
         raise HTTPException(
             status_code = status.HTTP_403_FORBIDDEN, # 403 acesso proibido
             detail = "Você não tem permissão para acessar este perfil !"
         )
-    """
-
+    
     user_profile = db.query(models.User).filter(models.User.id == user_id).first() # Esse código busca no banco qualquer user_id vindo da URL.
     # Mas se a condição de current_user.id == user_id, então ele busca no db com segurança.
 
