@@ -1,5 +1,3 @@
-# appsec-banking-api-lab
-
 ## Laboratório de AppSec na Prática | Fundamentos de DevSecOps
 
 Este repositório é um **Laboratório de AppSec e DevSecOps Prático** focado no ciclo **Build-Break-Fix** (Construir-Quebrar-Corrigir). A aplicação simula um serviço bancário básico e foi intencionalmente construída para ser vulnerável a ataques de **Autorização**.
