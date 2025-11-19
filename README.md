@@ -13,12 +13,12 @@ O objetivo final é demonstrar a capacidade de:
 
 ## Tecnologias Utilizadas
 
-| Componente | Tecnologia | Finalidade |
-| :--- | :--- | :--- |
-| **API** | Python 3.x, FastAPI | Desenvolvimento rápido e assíncrono. |
-| **Servidor** | Uvicorn | Servidor ASGI de alto desempenho. |
-| **Banco de Dados** | PostgreSQL (via Docker) | Persistência de dados (essencial para testar SQL Injection). |
-| **Autenticação** | JWT (JSON Web Tokens) e Bcrypt | Gerenciamento de tokens e hashing de senha (OWASP C3). |
+| Componente | Tecnologia |
+| :--- | :--- |
+| **API** | Python 3.x, FastAPI |
+| **Servidor** | Uvicorn |
+| **Banco de Dados** | PostgreSQL (via Docker) |
+| **Autenticação** | JWT (JSON Web Tokens) e Bcrypt |
 
 ---
 
@@ -32,10 +32,10 @@ O ataque específico explorado é o **IDOR (Insecure Direct Object Reference)**.
 
 ### 2. A Falha no Código
 
-A função `GET /profile/{user_id}` exigia a **Autenticação** (o usuário precisava estar logado, via `current_user = Depends(...)`), mas **falhava em implementar a Autorização**.
+A função `GET /profile/{user_id}` exigia a **Autenticação** (o usuário precisava estar logado, via `current_user = Depends(...)`, mas **falhava em implementar a Autorização**.
 
 * A **linha vulnerável** confiava cegamente no parâmetro `user_id` vindo da URL.
-* **Exploit:** Usuário logado como João (ID 1) conseguia acessar o perfil de Maria (ID 2) ao alterar o ID na rota, vazando dados sensíveis.
+* **Exploit:** Usuário logado como João (ID 1) conseguia acessar o perfil de Ana (ID 2) ao alterar o ID na rota, vazando dados sensíveis.
 
 ### 3. As CWEs Relacionadas
 
@@ -51,8 +51,10 @@ As vulnerabilidades de IDOR/Broken Access Control são diretamente mapeadas para
 
 O projeto está atualmente na versão **corrigida**. A defesa foi implementada através da checagem de **Autorização** explícita:
 
-1.  **Defesa (Proactive Control):** Foi aplicado o **OWASP Proactive Control C4: Implement Access Control**, adicionando uma estrutura condicional (`if current_user.id != user_id: raise HTTPException(403)`) na função `get_user_profile`.
-2.  **Verificação (ASVS):** A implementação dessa checagem garante que o código satisfaz requisitos críticos da seção **V4: Access Control** do **OWASP ASVS** (Application Security Verification Standard).
+1.  **Defesa (Proactive Control):** Foi aplicado o **OWASP Proactive Control C4: Implement Access Control**, adicionando uma estrutura condicional na função `get_user_profile`.
+     (`if current_user.id != user_id:
+        raise HTTPException(403)`) 
+3.  **Verificação (ASVS):** A implementação dessa checagem garante que o código satisfaz requisitos críticos da seção **V4: Access Control** do **OWASP ASVS** (Application Security Verification Standard).
 
 ---
 
