@@ -1,6 +1,5 @@
-## Laboratório de AppSec na Prática | Fundamentos de DevSecOps
-
-Este repositório é um **Laboratório de AppSec e DevSecOps Prático** focado no ciclo **Build-Break-Fix** (Construir-Quebrar-Corrigir). A aplicação simula um serviço bancário básico e foi intencionalmente construída para ser vulnerável a ataques de **Autorização**.
+## Laboratório de AppSec na Prática
+Este repositório é um **Laboratório de AppSec Prático** focado no ciclo **Build-Break-Fix** (Construir-Quebrar-Corrigir). A aplicação simula um serviço bancário básico e foi intencionalmente construída para ser vulnerável a ataques de **Autorização**.
 
 O objetivo final é demonstrar a capacidade de:
 1.  Identificar o risco (Ataque).
